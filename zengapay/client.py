@@ -17,6 +17,7 @@ from requests import Request, Session
 from requests.auth import AuthBase
 
 from .config import ZengaPayConfig
+from .utils import requests_retry_session
 
 
 class Response:
@@ -34,11 +35,12 @@ class ZengaPayAuth(AuthBase):
     def __init__(self, token):
         self.token = token
     
-    def __call__(self, req):
-        # Modify and return the request
+    def __call__(self, r):
+        """Attach an API user token to a custom auth header."""
 
-        req.headers["Authorization"] = f"Bearer {self.token}"
-        return req
+        # Modify and return the request
+        r.headers["Authorization"] = f"Bearer {self.token}"
+        return r
 
 
 class ClientInterface():
@@ -67,3 +69,20 @@ class ZengaPayAPI(ClientInterface):
     @property
     def config(self):
         return self._config
+    
+    def request(self, method, url, post_data=None):
+        self.auth_token = self.get_auth_token()
+        request = Request(
+            method,
+            url,
+            data=post_data,
+            auth=ZengaPayAuth(self.auth_token)
+        )
+
+        prep_req = self._session.prepare_request(request)
+        resp = requests_retry_session(session=self._session).send(prep_req, verify=False)
+
+        return resp
+    
+    def get_auth_token(self):
+        return self.config.api_token

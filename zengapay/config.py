@@ -8,7 +8,7 @@ class ZengaPayConfig(object):
         config = {
             ENVIRONMENT: os.environ.get("APP_SETTINGS", "sandbox"),
             BASE_URL: os.environ.get("BASE_URL", "https://api.sandbox.zengapay.com/v1/"),
-            API_TOKEN: os.environ.get("API_TOKEN")
+            USER_API_TOKEN: os.environ.get("API_TOKEN")
         }
         """
         
@@ -23,14 +23,14 @@ class ZengaPayConfig(object):
     
     @property
     def base_url(self):
-        base_url = self.config["BASEURL"]
+        base_url = self.config["BASE_URL"]
         if not base_url:
             raise ConfigurationError("BASEURL is missing in configuration.")
         return base_url
     
     @property
     def api_token(self):
-        token = self.config["API_TOKEN"]
+        token = self.config["USER_API_TOKEN"]
         if not token:
-            raise ConfigurationError("API_TOKEN is missing in configuration.")
-        return 
+            raise ConfigurationError("USER_API_TOKEN is missing in configuration.")
+        return token
