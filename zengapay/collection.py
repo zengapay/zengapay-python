@@ -36,12 +36,12 @@ class Collections(ZengaPayAPI):
     
 
 
-if __name__ == "__main__":
-    config = {
-        "ENVIRONMENT": os.environ.get("APP_SETTINGS", "sandbox"),
-        "BASE_URL": os.environ.get("BASE_URL", "https://api.sandbox.zengapay.com/v1"),
-        "USER_API_TOKEN": os.environ.get("API_TOKEN")
-    }
+# if __name__ == "__main__":
+#     config = {
+#         "ENVIRONMENT": os.environ.get("APP_SETTINGS", "sandbox"),
+#         "BASE_URL": os.environ.get("BASE_URL", "https://api.sandbox.zengapay.com/v1"),
+#         "USER_API_TOKEN": os.environ.get("API_TOKEN")
+#     }
 
-    collection = Collections(config)
-    collection.get_all_collections()
+#     collection = Collections(config)
+#     collection.get_all_collections()
