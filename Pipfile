@@ -11,6 +11,8 @@ isort = "==4.3.21"
 [packages]
 phonenumbers = "*"
 requests = "*"
+twine = "*"
+bumpversion = "*"
 
 [requires]
 python_version = "3.7"

@@ -3,11 +3,12 @@ from .utils import validate_number, validate_phone_number, validate_string
 
 
 class Collections(ZengaPayAPI):
-
     def collect(self, payload):
         payload["msisdn"] = validate_phone_number(payload.get("msisdn"))
         payload["amount"] = validate_number(payload.get("amount"))
-        payload["external_reference"] = validate_string(payload.get("external_reference"))
+        payload["external_reference"] = validate_string(
+            payload.get("external_reference")
+        )
         payload["narration"] = validate_string(payload.get("narration"))
 
         url = f"{self.config.base_url}/collections"
@@ -21,27 +22,15 @@ class Collections(ZengaPayAPI):
         res = self.request("GET", url)
 
         return res.json()
-    
+
     def get_collection(self, transaction_ref):
         url = f"{self.config.base_url}/collections/{validate_string(transaction_ref)}"
         res = self.request("GET", url)
 
         return res.json()
-    
+
     def get_transaction_status(self, transaction_ref):
         url = f"{self.config.base_url}/collections/{validate_string(transaction_ref)}"
         res = self.request("GET", url)
 
         return res.json()["data"]["transactionStatus"]
-    
-
-
-# if __name__ == "__main__":
-#     config = {
-#         "ENVIRONMENT": os.environ.get("APP_SETTINGS", "sandbox"),
-#         "BASE_URL": os.environ.get("BASE_URL", "https://api.sandbox.zengapay.com/v1"),
-#         "USER_API_TOKEN": os.environ.get("API_TOKEN")
-#     }
-
-#     collection = Collections(config)
-#     collection.get_all_collections()
