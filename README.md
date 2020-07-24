@@ -1,4 +1,4 @@
-# ZengaPay API Python Client
+# ZENGAPAY API Python Client
 ### Power your apps with our ZengaPay API
 
 This is the ZENGAPAY Python Client Library
