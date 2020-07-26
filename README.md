@@ -1,6 +1,8 @@
 # ZENGAPAY API Python Client
 ### Power your apps with our ZengaPay API
 
+ZENGAPAY is a Payments Gateway service that enables businesses to receive payments from their customers via mobile money, as well as make mobile money payments to any mobile money account holder or purchase Mobile Airtime or Mobile Data.
+
 This is the ZENGAPAY Python Client Library
 
 # Usage
@@ -15,7 +17,7 @@ This library supports Python 3.6+
 
 # Sandbox and Production Environment
 ## Creating a sandbox environment user environment
-Before using the library in your applications, please head over to the [API Documentation](https://developers.zengapay.com/#getting-started) to see how to set up your sandbox environment.
+Before using the library in your applications, please head over to our [API Documentation](https://developers.zengapay.com/#getting-started) to see how to set up your sandbox environment.
 
 The following is the API Endpoint for our sandbox environment:
 
@@ -23,7 +25,7 @@ The following is the API Endpoint for our sandbox environment:
 https://api.sandbox.zengapay.com/v1
 ```
 
-Here is the API Endpoint for our production environment:
+And Here is the API Endpoint for our production environment:
 
 ```
 https://api.zengapay.com/v1
@@ -33,7 +35,7 @@ https://api.zengapay.com/v1
 Before we can fully utilize the library, we need to specify the global configurations. The global configuration must contain the following.
 
 - `ZENGAPAY_APP_SETTINGS`: Optional environment, either "sandbox" or "production". Default is "sandbox".
-- `ZENGAPAY_BASE_URL`: An optional base url to ZengaPay API. By default the sandbox base url will be used.
+- `ZENGAPAY_BASE_URL`: An optional base url to ZENGAPAY API. By default the sandbox base url will be used.
 - `ZENGAPAY_USER_API_TOKEN`: Your secret user API token. This is mandatory. See he [API Documentation](https://developers.zengapay.com/#getting-started) to obtain your API token.
 
 Once you have specified the global config variables, the full configuration object to use in your project should look like this.
@@ -46,10 +48,10 @@ config = {
 }
 ```
 
-This will be need for each transaction you will be performing.
+This will be needed for each API Request you will be performing.
 
 ## Collections.
-The collections client can be created with configuration parameters as indicated above.
+The collections client can be created with configuration parameters as indicated below.
 
 ```python
 import os
@@ -66,7 +68,7 @@ client = Collections(config)
 ```
 
 ### Methods
-1. **collect**: This operation is used to request a payment from another consumer(Payer). The payer will be asked to authorize the payment. The transaction is executed once the payer has authorized the payment. The transaction will be in status PENDING until it is authorized or declined by the payer or it is timed out by the system. Status of the transaction can be validated by using `get_collection(transaction_ref)` or `get_transaction_status(transaction_ref)` using the `transaction reference`.
+1. **collect**: This operation is used to request a payment from customer (Payer). The payer will be asked to authorize the payment. The transaction is executed once the payer has authorized the payment. The transaction will be in status PENDING until it is authorized or declined by the payer or it is timed out by the system. Status of the transaction can be validated by using `get_collection(transaction_ref)` or `get_transaction_status(transaction_ref)` using the `transaction reference`.
 
 You can perform a collection using the payload as below. See he [API Documentation](https://developers.zengapay.com/#collections) to get what the parameters mean.
 
