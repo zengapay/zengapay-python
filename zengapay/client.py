@@ -70,8 +70,9 @@ class ZengaPayAPI(ClientInterface):
 
     def request(self, method, url, post_data=None):
         self.auth_token = self.get_auth_token()
+        # Turning `data` attribute to json since we are posting json data
         request = Request(
-            method, url, data=post_data, auth=ZengaPayAuth(self.auth_token)
+            method, url, json=post_data, auth=ZengaPayAuth(self.auth_token)
         )
 
         prep_req = self._session.prepare_request(request)
